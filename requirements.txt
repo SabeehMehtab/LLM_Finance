@@ -6,4 +6,4 @@ selenium
 pypdf
 chromadb
 faiss-cpu
-pysqlite3==0.5.2
+sqlite3==0.5.2
