@@ -21,7 +21,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
 
 from tools import AgentTools
+__import__('pysqlite3')
+import sys
 
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 YEAR_OPTIONS = [2020,2021,2022,2023,2024]
 EMBEDDING_MODELS = ['OpenAIEmbeddings']#, 'BAAI/bge-base-en-v1.5', 'BAAI/bge-m3']
 LLM_MODELS = ["GPT 3", "mistralai/Mixtral-8x7B-Instruct-v0.1", "huggingfaceh4/zephyr-7b-beta", "tiiuae/falcon-7b-instruct"]
