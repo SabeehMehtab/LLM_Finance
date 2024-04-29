@@ -14,7 +14,10 @@ from typing import List
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.common.exceptions import NoSuchElementException
+__import__('pysqlite3')
+import sys
 
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 class AgentTools():
     
     comp_button = None
