@@ -63,6 +63,10 @@ def set_agent_webdriver():
 
 
 def find_companies():
+  # Following is done to remove the store_btn and text, should the user had previously selected a report
+  if "user_report" in st.session_state: 
+    st.session_state.user_report = None
+  
   # Get table header
   header = st.session_state.driver.find_element(By.ID, 'annRpt').text
 
@@ -94,6 +98,10 @@ def find_companies():
     x+=1
 
 def find_reports():
+  # Following is done to remove the store_btn and text, should the user had previously selected a report
+  if "user_report" in st.session_state: 
+    st.session_state.user_report = None
+    
   # Variable to store report type and its online document link
   st.session_state.reports = dict()
 
@@ -183,7 +191,7 @@ def llm_inference_rag(tabRAG, llm, hf_token, api_key, temp):
   
   # Subheading 2 and info for user
   tabRAG.subheader('LLM Inference')
-  tabRAG.write("Now that the report is stored successfully, LLM can be tested. So, please a LLM and set its temperature from the left sidebar. Check the box to proceed!")
+  tabRAG.write("Now that the report is stored successfully, LLM can be tested. So, please choose a LLM and set its temperature from the left sidebar. Check the box to proceed!")
   
   # Give an option to user for changing the report via button. Once clicked, it should clear previously stored report.
   tabRAG.button("Change report", on_click=delete_report)
@@ -226,8 +234,7 @@ def web_scraping_rag(tabRAG, emb, hf_token, api_key, chunk_size, chunk_overlap):
     if st.session_state.company is not None:
       col3.selectbox("Select financial report to examine", st.session_state.reports.keys(),
                       index=None, key='user_report',
-                      on_change = lambda: st.toast(
-                        "Please make sure api key/token is present with appropriate embedding model to store the report"))
+                      on_change = lambda: tabRAG.write("**Please make sure api key/token is present with appropriate embedding model to store the report! Also, adjust the chunk size and chunk overlap to your interest.** "))
     if st.session_state.user_report is not None:
       col4.text('')
       col4.text('')
@@ -300,7 +307,7 @@ def main():
       
     # Subheadings and info for user
     tabAgent.subheader('ReAct Agent with LLM', divider='rainbow')
-    tabAgent.write("In the second approach, a ReAct agent is used with LLM to make use of different tools, some of them responsible for web scraping to fetch and store the financial report from https://financials.psx.com.pk/ into a vector store")
+    tabAgent.write("In the second approach, a ReAct agent is used with LLM to make use of different tools, some of them responsible for web scraping to fetch and store the financial report from https://financials.psx.com.pk/ into a vector store.")
     tabAgent.write("**However, the agent can only get annual financial reports in a given year and works with just OpenAI GPT 3 model.**")
     tabAgent.subheader('Test the Agent', divider='green')
     tabAgent.write("Before testing the agent, please set the model to GPT 3  and set its temperature. Make sure the api key is present. Check the box to proceed!")
@@ -311,7 +318,7 @@ def main():
     # After agreement, set the agent and ask user for prompt
     if llm_checkbox:
       agent = set_llm_agent(openai_apikey, temp)
-      tabAgent.write("Now, enter a prompt to run the LLM against and wait for its output below. ")
+      tabAgent.write("Now, enter a prompt to run the LLM against and wait for its output below. The default chunk size (1000) and chunk overlap (200) are used")
       user_prompt = tabAgent.text_input(label='Enter prompt here: ')
       
       # Use a run button to run the agent and display the output. Make sure user has entered a prompt
