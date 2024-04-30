@@ -232,14 +232,13 @@ def web_scraping_rag(tabRAG, emb, hf_token, api_key, chunk_size, chunk_overlap):
   col3, col4 = tabRAG.columns([0.8, 0.2])
   try:
     if st.session_state.company is not None:
-      col3.selectbox("Select financial report to examine", st.session_state.reports.keys(),
-                      index=None, key='user_report',
-                      on_change = lambda: tabRAG.write("**Please make sure api key/token is present with appropriate embedding model to store the report! Also, adjust the chunk size and chunk overlap to your interest.** "))
+      col3.selectbox("Select financial report to examine", st.session_state.reports.keys(), index=None, key='user_report')
     if st.session_state.user_report is not None:
       col4.text('')
       col4.text('')
       col4.button("Store report", key='store_btn', use_container_width=True,
                   on_click=fetch_and_store, args=(emb,hf_token,api_key, chunk_size, chunk_overlap))
+      tabRAG.write("**Please make sure api key/token is present with appropriate embedding model to store the report! Also, adjust the chunk size and chunk overlap to your interest.** ")
   except AttributeError as e:
     pass
   
