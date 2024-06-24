@@ -23,3 +23,14 @@ The way that the react agent is applied over here is that custom tools are defin
 4) retriever: As the name says, it retrieves relevant documents from the vector store and provides it to the LLM as context.
 
 All these tools are used by the agent once the user has entered a prompt so that the LLM can generate a response based on the context received from the retriever tool and the user prompt. 
+
+## Streamlit Testing
+**Note 1 : The appplication does contain errors and if encountered one, please re-run or refresh the page.**
+**Note 2 : Many of the reports are big for embeddings to be created with OpenAI Embedding model if you are using the free access and have limited access/request tokens.**
+
+With rag, simply follow the boxes to select and load a financial report, remember to include the api key before clicking the 'store' button. After this, select and adjust a model and its parameters. Then, carry on with any queries you like. Some query examples are:
+
+- Summarize the report
+- What are the total assets
+- How good is the cash flow
+
