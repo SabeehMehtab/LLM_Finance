@@ -26,6 +26,7 @@ All these tools are used by the agent once the user has entered a prompt so that
 
 ## Streamlit Testing
 **Note 1 : The appplication does contain errors and if encountered one, please re-run or refresh the page.**
+
 **Note 2 : Many of the reports are big for embeddings to be created with OpenAI Embedding model if you are using the free access and have limited access/request tokens.**
 
 With rag, simply follow the boxes to select and load a financial report, remember to include the api key before clicking the 'store' button. After this, select and adjust a model and its parameters. Then, carry on with any queries you like. Some query examples are:
