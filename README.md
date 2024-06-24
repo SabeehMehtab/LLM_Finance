@@ -3,6 +3,8 @@ This project is about using LLM's for analysing financial reports of companies l
 They can be useful to draw insights from the reports and summarize them, or provide a judgement on the companies finances. The LLM models solely for this purpose are, yet, limited, but are in the process of being developed. 
 Hence, this project utilizes currently developed LLMs (see list below), with the following two approaches, implemented to carry out the same task of fetching and analysing reports from PSX. 
 
+Streamlit was used to host the application and can be accessed here: [https://sms-llmfinance.streamlit.app/](https://sms-llmfinance.streamlit.app/)
+
 ## RAG
 Retrieval-Augmented Generation (RAG) enhances the capabilities of Large Language Models (LLMs) by integrating references to external authoritative knowledge bases, without the need for retraining.
 In our case, the financial reports serve as the knowledge base. However, this external data is stored in a 'Vector Database', a knowledge library that the LLM's can understand. Before storing the data, it is converted into numerical representation, vector, by an 'Embedding Model' and broken down into multiple documents. Once stored, a search query can be performed to fetch relevant document(s) and these are provided as context, along with the user query, for the LLM to generate an accurate response. [Read more](https://aws.amazon.com/what-is/retrieval-augmented-generation/)
